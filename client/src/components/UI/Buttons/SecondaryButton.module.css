@@ -1,18 +1,22 @@
+:root {
+  --primary: #379d97;
+  --secondary: #99cecb;
+  --accent: #e36b5a;
+}
+
 .button-theme {
   border: 1px solid var(--primary);
   border-radius: 5px;
   font-size: 15px;
   padding: 5px 20px;
-  color: white;
+  color: var(--primary);
   margin: 5px;
-  background: var(--primary);
+  background: none;
   transition: color 0.2s;
   outline: none;
 }
 
 .button-theme:hover {
-  border: 1px solid var(--primary);
-  background: white !important;
-  color: var(--primary);
+  color: var(--secondary);
   cursor: pointer;
 }

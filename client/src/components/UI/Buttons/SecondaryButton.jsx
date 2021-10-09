@@ -1,8 +1,8 @@
 import React from "react";
 import Colors from "../../Colors";
-import classes from "./Button.module.css";
+import classes from "./SecondaryButton.module.css";
 
-function Button(props) {
+function SecondaryButton(props) {
   return (
     <button className={classes["button-theme"]} onClick={props.onClick}>
       {props.title}
@@ -10,4 +10,4 @@ function Button(props) {
   );
 }
 
-export default Button;
+export default SecondaryButton;
