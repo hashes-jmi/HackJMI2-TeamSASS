@@ -1,0 +1,19 @@
+:root {
+  --primary: "#379d97";
+  --accent: "#e36b5a";
+}
+
+.button-theme {
+  border: 1px solid var(--primary);
+  border-radius: 5px;
+  font-size: 15px;
+  padding: 5px 20px;
+  color: white;
+}
+
+.button-theme:hover {
+  border: 1px solid var(--primary);
+  background-color: white !important;
+  color: var(--primary);
+  cursor: pointer;
+}
