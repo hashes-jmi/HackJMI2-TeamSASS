@@ -14,7 +14,7 @@ const servicesCardData = [
   },
   {
     id: "c2",
-    text: "See live local or global health status",
+    text: "Watch live local or global health status",
     imgURL: "",
   },
   {
@@ -62,7 +62,7 @@ const Home = () => {
               <div className={classes.display}>
                 <div className={classes["service-card"]}>
                   <div className={classes["service-card--text"]}>
-                    HELLO WORLD
+                    HELLO
                   </div>
                 </div>
               </div>
