@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "../UI/Buttons/Button";
-import SecondaryButton from "./../UI/Buttons/SecondaryButton";
+import SecondaryButton from "../UI/Buttons/SecondaryButton";
 import classes from "./Navbar.module.css";
 
 const Navbar = (props) => {
@@ -11,7 +11,7 @@ const Navbar = (props) => {
     <nav className={navbarClass}>
       <ul className={flexRowAlignClass}>
         <li>
-          <a href="/home">Home</a>
+          <a href="/home">Main</a>
         </li>
         <li>
           <a href="/map">MapStats</a>

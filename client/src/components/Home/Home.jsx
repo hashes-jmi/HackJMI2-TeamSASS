@@ -2,9 +2,9 @@ import React, { Fragment } from "react";
 import Button from "../UI/Buttons/Button";
 import Card from "../UI/Card/Card";
 import classes from "./Home.module.css";
-import pmPic from "./../../images/pmPic.png";
+import pmPic from "../../images/pmPic.png";
 import Colors from "../Colors";
-import map from "./../../images/map.png";
+import map from "../../images/map.png";
 
 const servicesCardData = [
   {
@@ -62,7 +62,7 @@ const Home = () => {
               <div className={classes.display}>
                 <div className={classes["service-card"]}>
                   <div className={classes["service-card--text"]}>
-                    {data.text}
+                    HELLO WORLD
                   </div>
                 </div>
               </div>
