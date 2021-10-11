@@ -5,6 +5,7 @@ import classes from "./Home.module.css";
 import pmPic from "./../../images/pmPic.png";
 import Colors from "../Colors";
 import map from "./../../images/map.png";
+import Heading from "../UI/Heading/Heading";
 
 const servicesCardData = [
   {
@@ -38,9 +39,7 @@ const Home = () => {
       <main className={classes.content}>
         <Card>
           <section className={classes.intro}>
-            <div className={classes.heading}>
-              <h1>NAME OF OUR WEBSITE</h1>
-            </div>
+            <Heading text="NAME OF OUR WEBSITE" />
             <p>
               In order to achieve the mission
               of.....asdhaksdhkashdkjasdhkashdkashdkshadkjhaskdhaskdhaksdhkasdhkasdhvnhguta
@@ -52,21 +51,21 @@ const Home = () => {
             <Button title="Download Your e-MedCard" />
           </section>
         </Card>
+
+        {/* SERVICES SECTION */}
         <Card>
           <section className={classes.services}>
-            <div className={classes.heading}>
-              <h1>Our Services</h1>
-            </div>
-
-            {servicesCardData.map((data) => (
-              <div className={classes.display}>
+            <Heading text="Our Services" />
+            <div className={classes.display}>
+              {/* SERVICES */}
+              {servicesCardData.map((data) => (
                 <div className={classes["service-card"]}>
                   <div className={classes["service-card--text"]}>
                     {data.text}
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </section>
         </Card>
       </main>

@@ -1,8 +1,4 @@
-:root {
-  --primary: #379d97;
-  --secondary: #99cecb;
-  --accent: #e36b5a;
-}
+
 
 .button-theme {
   border: 1px solid var(--primary);

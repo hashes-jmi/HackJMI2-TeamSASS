@@ -1,0 +1,6 @@
+.heading {
+  border-bottom: 3px solid var(--primary);
+  border-radius: 3px;
+  width: fit-content;
+  margin-bottom: 5px;
+}
