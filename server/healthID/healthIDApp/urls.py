@@ -6,7 +6,8 @@ urlpatterns=[
 
     path('register',Register.as_view()),
     path('login-otp',GenerateOTP.as_view()),
-    path("test",Working.as_view()),
+    path("user-info",GetPersonData.as_view()),
+    path('user-info/add',AddMedicalData.as_view()),
     # path("generate-otp",GenerateOTP.as_view()),
     path("verify-otp",VerifyOTP.as_view())
     # path('/token',TokenObtainPairView.as_view(),name="obtain_token"),
