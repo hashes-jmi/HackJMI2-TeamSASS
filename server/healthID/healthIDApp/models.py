@@ -6,6 +6,7 @@ from django.contrib.auth.models import AbstractUser
 from django.conf import settings
 from django.db.models.base import ModelStateFieldsCacheDescriptor
 from django.db.models.deletion import CASCADE, DO_NOTHING
+from django.utils import tree
 
 
 # Create your models here.
@@ -39,7 +40,10 @@ class Hospital(models.Model):
     title="hospital"
     user=models.OneToOneField(settings.AUTH_USER_MODEL,on_delete=CASCADE,unique=True)
     name=models.CharField(max_length=100,blank=False)
-
+    hospital_address=models.OneToOneField('address',on_delete=CASCADE,null=True)
+    email=models.EmailField(blank=True)
+    num_of_otp=models.PositiveIntegerField(default=0)
+    is_verified=models.BooleanField(default=False)
 class Allergies(models.Model):
     name=models.CharField(max_length=10)
     belong=models.ForeignKey(basic_medical,on_delete=CASCADE,related_name="allergies",null=True)
@@ -55,4 +59,3 @@ class Disease(models.Model):
     is_current=models.BooleanField()
     belong=models.ForeignKey(basic_medical,on_delete=CASCADE,related_name="disease",null=True)
     is_communicatable=models.BooleanField()
-

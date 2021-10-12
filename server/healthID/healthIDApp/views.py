@@ -37,6 +37,109 @@ class Register(APIView):
         except:
             return Response("Invalid Input")
     
+class RegistrationHospital(APIView):
+    def get(self,request,*args,**kwargs):
+        name=request.data['name']
+        email=request.data['email']
+        # password=request.data['password']
+        hospital_address=address.objects.create(country=request.data['address']['country'],state=request.data['address']['state'],pincode=request.data['address']['pincode'],address_line1=request.data['address']['line1'])
+        try:
+            hospital_base=base_user.objects.create(username=uuid.uuid4())
+            hospital_base.save()
+            hospital_address.save()
+            new_hospital=Hospital.objects.create(user=hospital_base,name=name,email=email,hospital_address=hospital_address)
+            new_hospital.save()
+            return Response({'status':'Verify Please','E-id':hospital_base.username})
+        except:
+            return Response("invalid input")
+
+class GenerateOTP_Hospital(APIView):
+    def get(self,request,*args,**kwargs):
+        eid=request.data['eid']
+        getHospital=base_user.objects.get(username=eid)
+        hospital_inst=Hospital.objects.get(user=getHospital)
+    
+        hospital_inst.num_of_otp+=1
+        hospital_inst.save()
+        otp=generateOTP(hospital_inst.email,hospital_inst.num_of_otp)
+        api_key = 'adf2c704fc5bbc9f699f6c5ecc8a26b4'
+        api_secret = '3910da862badeabf44145829e1c1364a'
+        mailjet=Client(auth=(api_key,api_secret),version='v3.1')
+        data={
+            'Messages':[{
+                "From":{
+                    "Email":"gamma110005@gmail.com",
+                    "Name":"HealthID"
+                },
+                "To":[
+                    {
+                        "Email":hospital_inst.email,
+                        "Name":"Testing"
+                    }
+                ]
+            ,
+            "Subject":"OTP Verification",
+            "TextPart":f"OTP verification is {otp}",
+            "HTMLPart":f"<h2>OTP Verification is {otp}",
+            "CustomID":"AppGettingStartedTest"
+            }
+            ]
+        }
+
+        print(otp)
+        try:
+            # sg=SendGridAPIClient('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')
+            # message=Mail(
+            #     from_email="mhodsaif.sps@gmail.com",
+            #     to_emails=personUser.email,
+            #     subject='OTP verification',
+            #     html_content=f'<h1>Your otp is {otp}</h1>'
+            # )
+            response=mailjet.send.create(data=data)
+            print(response.status_code)
+            
+            print(response.json())
+            if(response.status_code==200):
+                return Response({'status':'otp send successfully','otp':otp})
+            else:
+                return Response("Error Occured")
+        except Exception as e:
+            print(e)
+            return Response({'error occured'})
+
+class VerifyOTP_Hospital(APIView):
+    def post(self,request,*args,**kwargs):
+        otp=request.data['otp']
+        eid=request.data['eid']
+        getHospital_base=base_user.objects.get(username=eid)
+        hospital_inst=Hospital.objects.get(user=getHospital_base)        
+        if verifyOTP(hospital_inst.email,hospital_inst.num_of_otp,otp):
+            hospital_inst.is_verified=True
+            hospital_inst.save()
+            refresh=RefreshToken.for_user(getHospital_base)
+        
+            return Response({'status':"Success",'access':str(refresh.access_token)})
+        return Response("OTP is wrong",status=401)
+
+
+class ViewEID_Details(APIView):
+    permission_classes=[IsAuthenticated]
+    def get(self,request,*args,**kwargs):
+        userBase=request.user
+        
+        try:
+            hospital_inst=Hospital.objects.get(user=userBase)
+            if hospital_inst.is_verified==True:
+                eid=request.data['eid']
+                otherUserbase=base_user.objects.get(username=eid)
+                personInst=person.objects.get(user=otherUserbase)
+                data=GetUserInfo_Personal(personInst).data
+                return Response(data)
+            else:
+                return Response("Not verified",status=401)
+        except Exception as e:
+            print(e)
+            return Response("Not Authorized",status=401)
 # class login(APIView):
 #     def get(self,request,*args,**kwargs):
         
@@ -110,7 +213,7 @@ class GenerateOTP(APIView):
             
             print(response.json())
             if(response.status_code==200):
-                return Response({'otp send successfully'})
+                return Response({'status':'otp send successfully','otp':otp})
             else:
                 return Response("Error Occured")
         except Exception as e:
