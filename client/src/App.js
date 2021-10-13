@@ -13,6 +13,7 @@ function App() {
       <Route path="/" exact>
         <Redirect to="/home" />
       </Route>
+
       <Route path="/home">
         <Home />
       </Route>

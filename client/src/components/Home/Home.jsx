@@ -2,10 +2,10 @@ import React, { Fragment } from "react";
 import Button from "../UI/Buttons/Button";
 import Card from "../UI/Card/Card";
 import classes from "./Home.module.css";
-import pmPic from "./../../images/pmPic.png";
+import pmPic from "../../images/pmPic.png";
 import Colors from "../Colors";
-import map from "./../../images/map.png";
-import Heading from "../UI/Heading/Heading";
+import map from "../../images/map.png";
+import Heading from "./../UI/Heading/Heading";
 
 const servicesCardData = [
   {
@@ -15,7 +15,7 @@ const servicesCardData = [
   },
   {
     id: "c2",
-    text: "See live local or global health status",
+    text: "Watch live local or global health status",
     imgURL: "",
   },
   {
@@ -60,9 +60,7 @@ const Home = () => {
               {/* SERVICES */}
               {servicesCardData.map((data) => (
                 <div className={classes["service-card"]}>
-                  <div className={classes["service-card--text"]}>
-                    {data.text}
-                  </div>
+                  <div className={classes["service-card--text"]}>HELLO</div>
                 </div>
               ))}
             </div>
