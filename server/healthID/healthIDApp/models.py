@@ -24,8 +24,8 @@ class person(models.Model):
     num_of_otp=models.PositiveIntegerField(default=0)
     email=models.EmailField(blank=False)
     aadhar=models.PositiveIntegerField(blank=True)
-    user_address=models.OneToOneField('address',on_delete=CASCADE,null=True)
-    basic_medical_data=models.OneToOneField('basic_medical',on_delete=DO_NOTHING,blank=True,null=True)
+    user_address=models.OneToOneField('address',on_delete=CASCADE,null=True,related_name="address_of")
+    basic_medical_data=models.OneToOneField('basic_medical',on_delete=DO_NOTHING,blank=True,null=True,related_name="basic_medical_of")
 class address(models.Model):
     country=models.CharField(max_length=15)
     state=models.CharField(max_length=30)
@@ -59,3 +59,6 @@ class Disease(models.Model):
     is_current=models.BooleanField()
     belong=models.ForeignKey(basic_medical,on_delete=CASCADE,related_name="disease",null=True)
     is_communicatable=models.BooleanField()
+
+    def __str__(self):
+        return f"name :{self.name}"

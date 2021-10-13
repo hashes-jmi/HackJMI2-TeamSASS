@@ -17,6 +17,7 @@ from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 from .serializers import *
 from mailjet_rest import Client
+from .utils import render_to_pdf
 # Create your views here.
 
 class Register(APIView):
@@ -259,7 +260,28 @@ class AddMedicalData(APIView):
         
         return Response("workin")        
 
+class GetLocationInfo(APIView):
+    # permission_classes=[IsAuthenticated]
+    def get(self,request,*args,**kwargs):
+        # userBase=request.user
+        # personData=person.objects.get(user=userBase)
+        pincode=request.data['pincode']
+        address_list=person.objects.filter(user_address__in=address.objects.filter(pincode=pincode))
 
+        disease_list=basic_medical.objects.filter(disease__in=Disease.objects.filter(is_communicatable=True),basic_medical_of__in=address_list)
+        d=Disease.objects.filter(is_communicatable=True,belong__in=disease_list,is_current=True)        
+        print(d)
+        return Response(d.count())
+        
+class GeneratePdf(APIView):
+    permission_classes=[IsAuthenticated]
+    def get(self,request,*args,**kwargs):
+        personData=person.objects.get(pk=1)
+        context=GetUserInfo_Personal(personData).data
+        print(context)
+        pdf=render_to_pdf('Ecard.html',context)
+       
+        return HttpResponse(pdf,content_type='application/pdf')
 
 def generateOTP(email,num_of_otp):
     keygen=str(email)+"RNijLmlGONx4qgGCrgvm"
