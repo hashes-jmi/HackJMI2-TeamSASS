@@ -8,7 +8,7 @@ import axios from "axios";
 
 function Signup(props) {
   const URL = `https://mhodsaifansari.pythonanywhere.com`;
-
+// const URL=`http://127.0.0.1:8000`
   const [userData, setUserData] = useState({
     firstName: "",
     lastName: "",
@@ -27,25 +27,23 @@ function Signup(props) {
     e.preventDefault();
     console.log(userData);
     const requestObject = {
-      name: userData.firstName + " " + userData.lastName,
-      phone: +userData.phone,
-      email: userData.email,
-      aadhar: +userData.aadhar,
-      address: {
-        country: userData.address.country,
-        state: userData.address.state,
-        pincode: userData.address.pincode,
-        line1: userData.address.line_1,
+      "name": userData.firstName + " " + userData.lastName,
+      "phone": +userData.phone,
+      "email": userData.email,
+      "aadhar": +userData.aadhar,
+      
+      "address": {
+        "country": userData.address.country,
+        "state": userData.address.state,
+        "pincode": userData.address.pincode,
+        "line1": userData.address.line_1,
       },
     };
-
-    const response = await axios.post(
-      `${URL}/register`,
-      JSON.stringify(requestObject)
-    );
-
+    console.log(requestObject);
+     const response = axios.post(`${URL}/register`,requestObject)
     const resData = await response.json();
-    console.log(resData);
+
+    // console.log(resData);
   };
 
   return (
