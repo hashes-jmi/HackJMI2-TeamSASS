@@ -15,7 +15,8 @@ urlpatterns=[
     path("hospital/verify-otp",VerifyOTP_Hospital.as_view()),
     path("hospital/getInfo",ViewEID_Details.as_view()),
     path("user-info/getLocationStatus",GetLocationInfo.as_view()),
-    path("card",GeneratePdf.as_view())
+    path("card",GeneratePdf.as_view()),
+    path("getStats",GetStatsBMI.as_view())
     # path('/token',TokenObtainPairView.as_view(),name="obtain_token"),
     # path('/token/refresh',TokenRefreshView.as_view(),name="refresh_token"),path('/token/verify',TokenVerifyView.as_view(),name="verify_token")
 ]
