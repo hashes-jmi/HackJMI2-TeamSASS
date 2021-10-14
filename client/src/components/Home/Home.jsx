@@ -33,7 +33,7 @@ const Home = () => {
           <img src={pmPic} alt="PM of India, Mr.Modi" />
           <div>
             <p>PM DIGITAL HEALTH MISSION....</p>
-            <p>HackJmi hackathon</p>
+            
           </div>
         </div>
       </div>
