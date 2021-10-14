@@ -1,0 +1,80 @@
+<html>
+    <head>
+        <title>Title</title>
+    
+    <style type="text/css">
+    
+    </style>
+    </head>
+    <body>
+        <div>
+            <h1>ECard:{{user.username}}</h1>
+        </div>
+        <div>
+            <h4>Name: {{name}}</h4>
+            <div>Address:
+                <h4>Line1:{{user_address.address_line1}} </h4>
+                <h4>Pincode:{{user_address.pincode}} State: {{user_address.state}}</h4>
+                <h4>Country: {{user_address.country}}</h4>
+                
+            </div>
+            <h4>blood group: {{basic_medical_data.blood_group}}</h4>
+            <h4>Aadhar:</h4>
+            <h4>Email:</h4>
+        </div>
+        <div>
+            <h4>basic Medical details</h4>
+            <h5>height:{{basic_medical_data.height}} </h5>
+            <h5>weight:{{basic_medical_data.weight}} </h5>
+            <div>
+                <h4>Allergies</h4>
+                {% if basic_medical_data.allergies %}
+                
+                {% for allergie in basic_medical_data.allergies%}
+                <div>
+                    <h5>{{allergie.name}}</h5>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div>
+                    <h5>No list</h5>
+                </div>
+                {% endif %}
+                <div>
+                    <h4>Surgery</h4>
+                    {% if basic_medical_data.surgery %}
+                
+                        {% for each_surgery in basic_medical_data.surgery%}
+                            <div>
+                                <h5>Name: {{each_surgery.name}}</h5>
+                                <h5>Date: {{each_surgery.date}}</h5>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div>
+                            <h5>No list</h5>
+                        </div>
+                    {% endif %}
+                </div>
+                <div>
+                    <h4>Disease</h4>
+                    {% if basic_medical_data.disease %}
+                
+                        {% for each_disease in basic_medical_data.disease%}
+                            <div>
+                                <h5>Name: {{each_disease.name}}</h5>
+                                <h5>Currently: {{each_disease.is_current}}</h5>
+                                <h5>Last Diagnose: {{each_disease.last_diagnose}}</h5>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div>
+                            <h5>No list</h5>
+                        </div>
+                    {% endif %}
+                
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
