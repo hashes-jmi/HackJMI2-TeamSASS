@@ -32,7 +32,8 @@ const Home = () => {
         <div className={classes.mission}>
           <img src={pmPic} alt="PM of India, Mr.Modi" />
           <div>
-            <p>PM DIGITAL HEALTH MISSION</p>
+            <p>PM DIGITAL HEALTH MISSION....</p>
+            <p>HackJmi hackathon</p>
           </div>
         </div>
       </div>
