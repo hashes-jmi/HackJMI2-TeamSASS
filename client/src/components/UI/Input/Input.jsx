@@ -8,8 +8,9 @@ function Input(props) {
       type={props.type}
       placeholder={props.placeholder}
       className={classes["custom-input"] + " " + props.className}
-      onChange={props.onChange}
+      onChange={(val) => props.onChange(val)}
       maxLength={props.maxLength}
+      {...props}
     />
   );
 }

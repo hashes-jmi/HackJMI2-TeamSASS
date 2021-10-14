@@ -24,3 +24,18 @@
   flex-direction: row;
   align-items: center;
 }
+
+.signup .custom-input-select {
+  padding: 7.5px 20px;
+  border: 2px solid var(--secondary);
+  border-radius: 5px;
+  outline: none;
+  margin: 5px;
+}
+
+.signup .custom-input-select:focus {
+  border-color: var(--primary);
+}
+.signup .custom-input-select::placeholder {
+  color: rgb(189, 189, 189);
+}
