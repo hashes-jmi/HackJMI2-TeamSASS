@@ -26,6 +26,17 @@ class person(models.Model):
     aadhar=models.PositiveIntegerField(blank=True)
     user_address=models.OneToOneField('address',on_delete=CASCADE,null=True,related_name="address_of")
     basic_medical_data=models.OneToOneField('basic_medical',on_delete=DO_NOTHING,blank=True,null=True,related_name="basic_medical_of")
+    dob=models.DateField(null=True)
+    gender=models.CharField(max_length=10)
+
+
+class organization(models.Model):
+    user=models.OneToOneField(settings.AUTH_USER_MODEL,on_delete=CASCADE,unique=True)
+    name=models.CharField(max_length=20,blank=False)
+    organization_address=models.OneToOneField('address',on_delete=CASCADE,related_name="address_of_org")
+    num_of_otp=models.PositiveIntegerField(default=0)
+    is_verified=models.BooleanField(default=False)
+    email=models.EmailField()
 class address(models.Model):
     country=models.CharField(max_length=15)
     state=models.CharField(max_length=30)
@@ -36,6 +47,9 @@ class basic_medical(models.Model):
     height=models.PositiveSmallIntegerField(null=True)
     weight=models.PositiveSmallIntegerField(null=True)
     blood_group=models.TextField(null=True)
+    @property
+    def BMI(self):
+        return round((self.weight*10000)/(self.height*self.height),2)
 class Hospital(models.Model):
     title="hospital"
     user=models.OneToOneField(settings.AUTH_USER_MODEL,on_delete=CASCADE,unique=True)
@@ -62,3 +76,4 @@ class Disease(models.Model):
 
     def __str__(self):
         return f"name :{self.name}"
+

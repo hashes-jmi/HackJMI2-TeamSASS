@@ -1,0 +1,14 @@
+.custom-input {
+  padding: 7.5px 20px;
+  border: 2px solid var(--secondary);
+  border-radius: 5px;
+  outline: none;
+  margin: 5px;
+}
+
+.custom-input:focus {
+  border-color: var(--primary);
+}
+.custom-input::placeholder {
+  color: rgb(189, 189, 189);
+}
