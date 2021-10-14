@@ -40,10 +40,10 @@ function Signup(props) {
       },
     };
     console.log(requestObject);
-     const response = axios.post(`${URL}/register`,requestObject)
-    const resData = await response.json();
+     const response = await axios.post(`${URL}/register`,requestObject)
+    const resData = await response.data;
 
-    // console.log(resData);
+    console.log(resData);
   };
 
   return (
