@@ -5,7 +5,7 @@ import Map from "./components/Map Stats/Map";
 import Navbar from "./components/Navbar/Navbar";
 import Login from "./components/Authentication/Login";
 import Signup from "./components/Authentication/Signup";
-
+import UserMedicalData from './components/userMedicalData/UserMedicalData'
 function App() {
   return (
     <div>
@@ -28,6 +28,7 @@ function App() {
       <Route path="/map">
         <Map />
       </Route>
+      
     </div>
   );
 }
