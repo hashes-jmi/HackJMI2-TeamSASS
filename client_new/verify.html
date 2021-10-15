@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style_signup.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    
+</head>
+<body>
+    <div>
+      <nav class="navbar flex-row-align">
+        <ul class="flex-row-align">
+          <li>
+            <a href="index.html">Main</a>
+          </li>
+          <li>
+            <a href="map.html">MapStats</a>
+          </li>
+        </ul>
+        <ul class="flex-row-align">
+          <li>
+            <a href="/my-e-medcard">My e-MedCard</a>
+          </li>
+
+            <button class="button-theme" >
+               <a href="login.html"> Signin</a>
+              </button>
+          
+          
+            <button class="button-theme">
+               <a href="signup.html">SignUp</a>
+              </button>
+    
+        </ul>
+      </nav>
+      <div>
+          <form id="verifyForm" on>
+              <label>Enter OTP:</label>
+              <input type="number">
+              <button type="submit" id="verifybtn">Verify</button>
+          </form>
+      </div>
+
+    </div>
+    <!-- <script src="verify.js"></script> -->
+</body>
+</html>

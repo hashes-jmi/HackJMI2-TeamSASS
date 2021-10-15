@@ -1,7 +1,3 @@
-document.onload(()=>{
-
-
-
-
+document.onload(
     
-})
+)

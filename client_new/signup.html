@@ -7,38 +7,41 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style_signup.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    
 </head>
 <body>
     <div>
-        <nav class="navbar flex-row-align">
-            <ul class="flex-row-align">
-              <li>
-                <a href="/home">Main</a>
-              </li>
-              <li>
-                <a href="/map">MapStats</a>
-              </li>
-            </ul>
-            <ul class="flex-row-align">
-              <li>
-                <a href="/my-e-medcard">My e-MedCard</a>
-              </li>
-                <button class="button-theme" >
-                    Signin
-                  </button>
-              
-              
-                <button class="button-theme">
-                   SignUp 
-                  </button>
-        
-            </ul>
-          </nav>
+      <nav class="navbar flex-row-align">
+        <ul class="flex-row-align">
+          <li>
+            <a href="index.html">Main</a>
+          </li>
+          <li>
+            <a href="map.html">MapStats</a>
+          </li>
+        </ul>
+        <ul class="flex-row-align">
+          <li>
+            <a href="/my-e-medcard">My e-MedCard</a>
+          </li>
+
+            <button class="button-theme" >
+               <a href="login.html"> Signin</a>
+              </button>
+          
+          
+            <button class="button-theme">
+               <a href="signup.html">SignUp</a>
+              </button>
+    
+        </ul>
+      </nav>
 
 
 
           <div class="signup">
-            <form >
+            <form id="signupForm">
               <div class="heading">
                 <h1>Create Your Account</h1>
               </div>
@@ -67,7 +70,7 @@
                   <input
                     type="address"
                     placeholder="Enter address..."
-                    id="create-address"
+                    id="create-address-line1"
                     
                   />
                 </div>
@@ -77,7 +80,7 @@
                   <input
                     type="address"
                     placeholder="Enter address..."
-                    id="create-address"
+                    id="create-address-country"
                     disabled="true"
                     value="India"
                   />
@@ -139,7 +142,7 @@
                   <input
                     type="address"
                     placeholder="Enter address..."
-                    id="create-address"
+                    id="create-address-pincode"
                     maxLength={6}
                   />
                 </div>
@@ -178,5 +181,6 @@
             </form>
           </div>
     </div>
+    <script src="signup.js"></script>
 </body>
 </html>
