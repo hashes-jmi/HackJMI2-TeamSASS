@@ -5,9 +5,11 @@ import Heading from "../UI/Heading/Heading";
 import Input from "../UI/Input/Input";
 import classes from "./Signup.module.css";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 function Signup(props) {
   const URL = `https://mhodsaifansari.pythonanywhere.com`;
+  const history = useHistory();
 
   const [userData, setUserData] = useState({
     firstName: "",
@@ -39,13 +41,12 @@ function Signup(props) {
       },
     };
 
-    const response = await axios.post(
-      `${URL}/register`,
-      JSON.stringify(requestObject)
-    );
+    const response = await axios.post(`${URL}/register`, requestObject);
+    if (response.ok) {
+      await axios.get(`${URL}/login-otp`, { aadhar });
+    }
 
-    const resData = await response.json();
-    console.log(resData);
+    history.push("/verify");
   };
 
   return (
