@@ -43,7 +43,7 @@ const Home = () => {
             <Heading text="NAME OF OUR WEBSITE" />
             <p>
               In order to achieve the mission
-              of.....adkshadkjhaskdhaskdhaksdhkasdhkasdhvnhguta
+              of.....adkshadkjhaskdhaskdhaksdhkasdhkasdhvnhg
               dhfh f bhgtuh ghuth dbgeht bghuthha bghus lorem epsum here and
               there and you and there my fine done compelte here and thenre but
               this is a compelte website to be publihsed online.
