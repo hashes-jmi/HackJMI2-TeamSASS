@@ -9,12 +9,9 @@ import { useHistory } from "react-router-dom";
 
 function Signup(props) {
   const URL = `https://mhodsaifansari.pythonanywhere.com`;
-<<<<<<< HEAD
   const history = useHistory();
 
-=======
-// const URL=`http://127.0.0.1:8000`
->>>>>>> ec8ab7152ead326f201b2a91cebd7d300b43c7ee
+  // const URL=`http://127.0.0.1:8000`
   const [userData, setUserData] = useState({
     firstName: "",
     lastName: "",
@@ -33,32 +30,27 @@ function Signup(props) {
     e.preventDefault();
     console.log(userData);
     const requestObject = {
-      "name": userData.firstName + " " + userData.lastName,
-      "phone": +userData.phone,
-      "email": userData.email,
-      "aadhar": +userData.aadhar,
-      
-      "address": {
-        "country": userData.address.country,
-        "state": userData.address.state,
-        "pincode": userData.address.pincode,
-        "line1": userData.address.line_1,
+      name: userData.firstName + " " + userData.lastName,
+      phone: +userData.phone,
+      email: userData.email,
+      aadhar: +userData.aadhar,
+
+      address: {
+        country: userData.address.country,
+        state: userData.address.state,
+        pincode: userData.address.pincode,
+        line1: userData.address.line_1,
       },
     };
-    console.log(requestObject);
-     const response = await axios.post(`${URL}/register`,requestObject)
+    const response = await axios.post(`${URL}/register`, requestObject);
     const resData = await response.data;
 
-<<<<<<< HEAD
-    const response = await axios.post(`${URL}/register`, requestObject);
     if (response.ok) {
-      await axios.get(`${URL}/login-otp`, { aadhar });
+      await axios.get(`${URL}/login-otp`, { aadhar: requestObject.aadhar });
     }
 
     history.push("/verify");
-=======
     console.log(resData);
->>>>>>> ec8ab7152ead326f201b2a91cebd7d300b43c7ee
   };
 
   return (
@@ -246,7 +238,7 @@ function Signup(props) {
             />
           </div>
         </div>
-        <Button title="Signup" onClick={submitHandler} />
+        <Button onClick={submitHandler}>Signup</Button>
       </form>
     </Card>
   );
