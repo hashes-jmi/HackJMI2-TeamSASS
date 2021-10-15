@@ -14,8 +14,8 @@ function App() {
         <Redirect to="/home" />
       </Route>
 
-      <Route path="/home">
-        <Home />
+      <Route path="/">
+        <Home />home
       </Route>
 
       <Route path="/login">

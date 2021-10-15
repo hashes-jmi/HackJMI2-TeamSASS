@@ -40,3 +40,4 @@ class GetUserInfo_Personal(serializers.ModelSerializer):
     class Meta:
         model=person
         fields=['name','user','is_verified','user_address','basic_medical_data']
+
