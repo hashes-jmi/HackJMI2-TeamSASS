@@ -49,16 +49,16 @@ function Signup(props) {
      const response = await axios.post(`${URL}/register`,requestObject)
     const resData = await response.data;
 
-<<<<<<< HEAD
+
     const response = await axios.post(`${URL}/register`, requestObject);
     if (response.ok) {
       await axios.get(`${URL}/login-otp`, { aadhar });
     }
 
     history.push("/verify");
-=======
+
     console.log(resData);
->>>>>>> ec8ab7152ead326f201b2a91cebd7d300b43c7ee
+
   };
 
   return (
