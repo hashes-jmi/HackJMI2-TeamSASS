@@ -8,8 +8,10 @@ import Input from "./../UI/Input/Input";
 import { useHistory } from "react-router";
 function Login() {
   const [addhar, setaadhar] = useState("");
+  const history = useHistory();
+
   const loginHandler = () => {
-    useHistory().push("/verify");
+    history.push("/verify");
   };
 
   return (
