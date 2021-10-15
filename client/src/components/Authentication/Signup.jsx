@@ -9,12 +9,10 @@ import { useHistory } from "react-router-dom";
 
 function Signup(props) {
   const URL = `https://mhodsaifansari.pythonanywhere.com`;
-<<<<<<< HEAD
+
   const history = useHistory();
 
-=======
-// const URL=`http://127.0.0.1:8000`
->>>>>>> ec8ab7152ead326f201b2a91cebd7d300b43c7ee
+
   const [userData, setUserData] = useState({
     firstName: "",
     lastName: "",
@@ -46,18 +44,17 @@ function Signup(props) {
       },
     };
     console.log(requestObject);
-     const response = await axios.post(`${URL}/register`,requestObject)
-    const resData = await response.data;
+  
 
 
     const response = await axios.post(`${URL}/register`, requestObject);
     if (response.ok) {
-      await axios.get(`${URL}/login-otp`, { aadhar });
+      await axios.get(`${URL}/login-otp`, { "aadhar":userData.aadhar });
     }
 
     history.push("/verify");
 
-    console.log(resData);
+
 
   };
 
