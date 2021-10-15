@@ -57,7 +57,7 @@ const Home = () => {
         <Card>
           <section className={classes.services}>
             <Heading text="Our Services" />
-            <div className={classes.display}>
+           <div className={classes["service-container"]}>
               {/* SERVICES */}
               {servicesCardData.map((data) => (
                 <div className={classes["service-card"]}>
