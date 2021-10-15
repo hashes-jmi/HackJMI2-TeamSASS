@@ -21,7 +21,8 @@ from .utils import render_to_pdf
 # Create your views here.
 
 class Register(APIView):
-    def get(self,request,*args,**kwargs):
+    def post(self,request,*args,**kwargs):
+        print(request.data['name'])
         name=request.data['name']
         phone_num=request.data['phone']
         email=request.data['email']
@@ -39,7 +40,7 @@ class Register(APIView):
             return Response("Invalid Input")
     
 class RegistrationHospital(APIView):
-    def get(self,request,*args,**kwargs):
+    def post(self,request,*args,**kwargs):
         name=request.data['name']
         email=request.data['email']
         # password=request.data['password']
@@ -55,7 +56,7 @@ class RegistrationHospital(APIView):
             return Response("invalid input")
 
 class GenerateOTP_Hospital(APIView):
-    def get(self,request,*args,**kwargs):
+    def post(self,request,*args,**kwargs):
         eid=request.data['eid']
         getHospital=base_user.objects.get(username=eid)
         hospital_inst=Hospital.objects.get(user=getHospital)
@@ -108,6 +109,28 @@ class GenerateOTP_Hospital(APIView):
             print(e)
             return Response({'error occured'})
 
+class GetStatsBMI(APIView):
+    def post(self,request,*args,**kwargs):
+        BMIList=[]
+        if "pincode" in request.data:
+            pincode=request.data["pincode"]
+
+            person_list=person.objects.filter(user_address__in=address.objects.filter(pincode=pincode))
+            print(person_list)
+            
+
+            for person_each in person_list:
+                    BMIList+=[person_each.basic_medical_data.BMI]
+            print(BMIList)
+            return Response(BMIList)
+        elif "state" in request.data:
+            state=request.data['state']
+            person_list=person.objects.filter(user_address__in=address.objects.filter(state=state))
+            print(person_list)
+            for person_each in person_list:
+                    BMIList+=[person_each.basic_medical_data.BMI]
+            print(BMIList)
+            return Response(BMIList)
 class VerifyOTP_Hospital(APIView):
     def post(self,request,*args,**kwargs):
         otp=request.data['otp']
@@ -125,7 +148,7 @@ class VerifyOTP_Hospital(APIView):
 
 class ViewEID_Details(APIView):
     permission_classes=[IsAuthenticated]
-    def get(self,request,*args,**kwargs):
+    def post(self,request,*args,**kwargs):
         userBase=request.user
         
         try:
@@ -159,7 +182,7 @@ class ViewEID_Details(APIView):
 #             return Response({'issue'})
 class GetPersonData(APIView):
     permission_classes=[IsAuthenticated]
-    def get(self,request,*args,**kwargs):
+    def post(self,request,*args,**kwargs):
         person_data=person.objects.get(user=request.user)
         if person_data.is_verified==True:
             data=GetUserInfo_Personal(person_data).data
@@ -168,7 +191,7 @@ class GetPersonData(APIView):
             return Response({"status":"Not verified"})
 class GenerateOTP(APIView):
     permission_classes=[AllowAny]
-    def get(self,request,*args,**kwargs):
+    def post(self,request,*args,**kwargs):
         aadhar=request.data['aadhar']
        
         personUser=person.objects.get(aadhar=aadhar)
@@ -262,7 +285,7 @@ class AddMedicalData(APIView):
 
 class GetLocationInfo(APIView):
     # permission_classes=[IsAuthenticated]
-    def get(self,request,*args,**kwargs):
+    def post(self,request,*args,**kwargs):
         # userBase=request.user
         # personData=person.objects.get(user=userBase)
         pincode=request.data['pincode']
@@ -275,13 +298,98 @@ class GetLocationInfo(APIView):
         
 class GeneratePdf(APIView):
     permission_classes=[IsAuthenticated]
-    def get(self,request,*args,**kwargs):
+    def post(self,request,*args,**kwargs):
         personData=person.objects.get(pk=1)
         context=GetUserInfo_Personal(personData).data
         print(context)
         pdf=render_to_pdf('Ecard.html',context)
        
         return HttpResponse(pdf,content_type='application/pdf')
+
+class OrgRegister(APIView):
+    def post(self,request,*args,**kwargs):
+        name=request.data['name']
+        # phone_num=request.data['phone']
+        email=request.data['email']
+        # aadhar=request.data['aadhar']
+        org_address=address.objects.create(country=request.data['address']['country'],state=request.data['address']['state'],pincode=request.data['address']['pincode'],address_line1=request.data['address']['line1'])
+
+        try:
+            org_base=base_user.objects.create(username=uuid.uuid4())
+            org_base.save()
+            org_address.save()
+            new_org=organization.objects.create(user=org_base,name=name,email=email,organization_address=org_address)
+            new_org.save()
+            return Response({"status":"verify please","E-id":org_base.username})
+        except:
+            return Response("Invalid Input")
+class OrgGenerateOTP(APIView):
+    def post(self,request,*args,**kwargs):
+        eid=request.data['eid']
+        getOrg=base_user.objects.get(username=eid)
+        org_inst=organization.objects.get(user=getOrg)
+    
+        org_inst.num_of_otp+=1
+        org_inst.save()
+        otp=generateOTP(org_inst.email,org_inst.num_of_otp)
+        api_key = 'adf2c704fc5bbc9f699f6c5ecc8a26b4'
+        api_secret = '3910da862badeabf44145829e1c1364a'
+        mailjet=Client(auth=(api_key,api_secret),version='v3.1')
+        data={
+            'Messages':[{
+                "From":{
+                    "Email":"gamma110005@gmail.com",
+                    "Name":"HealthID"
+                },
+                "To":[
+                    {
+                        "Email":org_inst.email,
+                        "Name":org_inst.name+" verification"
+                    }
+                ]
+            ,
+            "Subject":"OTP Verification",
+            "TextPart":f"OTP verification is {otp}",
+            "HTMLPart":f"<h2>OTP Verification is {otp}",
+            "CustomID":"AppGettingStartedTest"
+            }
+            ]
+        }
+
+        print(otp)
+        try:
+            # sg=SendGridAPIClient('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')
+            # message=Mail(
+            #     from_email="mhodsaif.sps@gmail.com",
+            #     to_emails=personUser.email,
+            #     subject='OTP verification',
+            #     html_content=f'<h1>Your otp is {otp}</h1>'
+            # )
+            response=mailjet.send.create(data=data)
+            print(response.status_code)
+            
+            print(response.json())
+            if(response.status_code==200):
+                return Response({'status':'otp send successfully','otp':otp})
+            else:
+                return Response("Error Occured")
+        except Exception as e:
+            print(e)
+            return Response({'error occured'})
+class VerifyOrgOTP(APIView):
+    def post(self,request,*args,**kwargs):
+        otp=request.data['otp']
+        eid=request.data['eid']
+        getorg=base_user.objects.get(username=eid)
+        org_inst=organization.objects.get(user=getorg)
+        
+        if verifyOTP(org_inst.email,org_inst.num_of_otp,otp):
+            org_inst.is_verified=True
+            org_inst.save()
+            refresh=RefreshToken.for_user(getorg)
+        
+            return Response({'status':"Success",'access':str(refresh.access_token)})
+        return Response("OTP is wrong")
 
 def generateOTP(email,num_of_otp):
     keygen=str(email)+"RNijLmlGONx4qgGCrgvm"

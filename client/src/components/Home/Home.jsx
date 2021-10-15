@@ -32,7 +32,8 @@ const Home = () => {
         <div className={classes.mission}>
           <img src={pmPic} alt="PM of India, Mr.Modi" />
           <div>
-            <p>PM DIGITAL HEALTH MISSION</p>
+            <p>PM DIGITAL HEALTH MISSION....</p>
+            
           </div>
         </div>
       </div>
@@ -42,10 +43,10 @@ const Home = () => {
             <Heading text="NAME OF OUR WEBSITE" />
             <p>
               In order to achieve the mission
-              of.....asdhaksdhkashdkjasdhkashdkashdkshadkjhaskdhaskdhaksdhkasdhkasdhvnhguta
+              of.....adkshadkjhaskdhaskdhaksdhkasdhkasdhvnhguta
               dhfh f bhgtuh ghuth dbgeht bghuthha bghus lorem epsum here and
               there and you and there my fine done compelte here and thenre but
-              this is a compelte website to be publihsed online
+              this is a compelte website to be publihsed online.
             </p>
 
             <Button title="Download Your e-MedCard" />
