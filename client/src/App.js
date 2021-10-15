@@ -40,7 +40,9 @@ function App() {
       <Route path="/verify">
         <Verify toggleLoggedIn={loginHandler} />
       </Route>
-
+      <Route path="/addMedicalDetails">
+        <UserMedicalData></UserMedicalData>
+      </Route>
     </div>
   );
 }

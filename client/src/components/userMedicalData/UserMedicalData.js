@@ -4,20 +4,18 @@ import Input from '../UI/Input/Input'
 import Button from '../UI/Buttons/Button'
 function UserMedicalData(){
 const [userData,setUserData]=useState({'height':'','weight':'','blood_group':'','allergiers':[],'surgery':[],'disease':[]})
-
-const addNewInput=(text)=>{
-    
+const [listCount,setListCount]=useState({'allergiers':0,'surgery':0})
+const addNewInput=(text,node)=>{
+    setListCount((prev)=>{return {...prev,allergiers:prev.allergiers+1}})
+    const handler=(e)=>{console.log(e.target.value)};
+    node.insertAdjacentHTML('beforebegin',`
     <div>
-        <label htmlFor={"user-"+text+"-"+userData[text].length}>{text}</label>
-    <Input
-    id={"user-"+text+"-"+userData[text].length}
-    type="text"
-    onChange={(e)=>{console.log(e.target.value)}}
-    />
-    </div>
+        
+        <Input id=${"user-"+text+"-"+listCount.allergiers} type="text"> 
+        </div>`)
     
 }
-
+{/* <label htmlFor=${"user-"+text+"-"+userData[text].length}>${text}</label> */}
 return (
 <>
 <form onSubmit={(e)=>{e.preventDefault()}}>
@@ -51,19 +49,51 @@ return (
         />
     </div>
     <div>
-        <div>
         <label htmlFor="user-allergiers">Your Allergers</label>
-        <Input
+        <div>
+        
+        {/* <Input
         id={"user-allergiers-"+userData.allergiers.length+1}
         type="text"
         placeholder="Enter your allerge"
         onChange={(e)=>{console.log(e.target.value)}}
-        />
+        /> */}
+        <Button onClick={(e)=>{ addNewInput("allergiers",e.target);}}>Add</Button>
         </div>
-        <Button onClick={(e)=>{addNewInput()}}></Button>
-        <button onClick={(e)=>{ addNewInput("allergiers",e);}}>Add</button>
+        
+        
     </div>
-   
+    <div>
+        <label htmlFor="user-surgery">Your surgeries</label>
+        <div>
+        
+        {/* <Input
+        id={"user-allergiers-"+userData.allergiers.length+1}
+        type="text"
+        placeholder="Enter your allerge"
+        onChange={(e)=>{console.log(e.target.value)}}
+        /> */}
+        <Button onClick={(e)=>{ addNewInput("surgery",e.target);}}>Add</Button>
+        </div>
+        
+        
+    </div>
+    <div>
+        <label htmlFor="user-disease">Your Disease</label>
+        <div>
+        
+        {/* <Input
+        id={"user-allergiers-"+userData.allergiers.length+1}
+        type="text"
+        placeholder="Enter your allerge"
+        onChange={(e)=>{console.log(e.target.value)}}
+        /> */}
+        <Button onClick={(e)=>{ addNewInput("disease",e.target);}}>Add</Button>
+        </div>
+        
+        
+    </div>
+    <Button>Submit Data</Button>
 </form>
 </>
 )
