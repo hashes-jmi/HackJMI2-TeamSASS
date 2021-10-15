@@ -10,7 +10,7 @@ import Heading from "./../UI/Heading/Heading";
 const servicesCardData = [
   {
     id: "c1",
-    text: "Get your e-medical card",
+    text: "Get your online Health ID",
     imgURL: "",
   },
   {
@@ -20,7 +20,7 @@ const servicesCardData = [
   },
   {
     id: "c3",
-    text: "Get 25% discount on all health procedures with e-Medcard",
+    text: "Get 25% discount on all health procedures with Health ID",
     imgURL: "",
   },
 ];
@@ -48,7 +48,7 @@ const Home = () => {
               website to be publihsed online.
             </p>
 
-            <Button>Download Your e-MedCard</Button>
+            <Button>Download Your Health ID</Button>
           </section>
         </Card>
 
@@ -56,11 +56,13 @@ const Home = () => {
         <Card>
           <section className={classes.services}>
             <Heading text="Our Services" />
-            <div className={classes.display}>
+            <div className={classes["services-display"]}>
               {/* SERVICES */}
               {servicesCardData.map((data) => (
                 <div className={classes["service-card"]}>
-                  <div className={classes["service-card--text"]}>HELLO</div>
+                  <div className={classes["service-card--text"]}>
+                    {data.text}
+                  </div>
                 </div>
               ))}
             </div>

@@ -44,6 +44,12 @@ main {
   align-items: center;
 }
 
+.services-display {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-around;
+}
 .services .heading {
   border-bottom: 5px solid var(--primary);
   border-radius: 5px;
@@ -59,6 +65,7 @@ main {
   color: var(--text-color);
   overflow: hidden;
   height: 150px;
+  margin: 5px;
 }
 
 .service-card img {

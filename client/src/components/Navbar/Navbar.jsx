@@ -21,7 +21,7 @@ const Navbar = (props) => {
       </ul>
       <ul className={authLinksClasses}>
         <li>
-          <a href="/my-e-medcard">My e-MedCard</a>
+          <a href="/my-e-medcard">My Health ID</a>
         </li>
         {!props.isLoggedIn ? (
           <Fragment>
