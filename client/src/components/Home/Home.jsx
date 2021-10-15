@@ -10,7 +10,7 @@ import Heading from "./../UI/Heading/Heading";
 const servicesCardData = [
   {
     id: "c1",
-    text: "Get your e-medical card",
+    text: "Get your medical e-card",
     imgURL: "",
   },
   {
