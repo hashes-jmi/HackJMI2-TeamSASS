@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style_signup.css">
+</head>
+<body>
+    <nav className={navbarClass}>
+        <ul className={flexRowAlignClass}>
+          <li>
+            <a href="/home">Main</a>
+          </li>
+          <li>
+            <a href="/map">MapStats</a>
+          </li>
+        </ul>
+        <ul className={authLinksClasses}>
+          <li>
+            <a href="/my-e-medcard">My e-MedCard</a>
+          </li>
+          <NavLink to="/login">
+            <SecondaryButton
+              title="Signin"
+              onClick={() => console.log("singin")}
+            />
+          </NavLink>
+          <NavLink to="/signup">
+            <Button title="Signup" onClick={() => console.log("signup")} />
+          </NavLink>
+        </ul>
+      </nav>
+    <div class="card ">
+
+    </div>
+</body>
+</html>
