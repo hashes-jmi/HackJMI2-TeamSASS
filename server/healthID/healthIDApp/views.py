@@ -392,17 +392,30 @@ class VerifyOrgOTP(APIView):
         return Response("OTP is wrong")
 class Org_GetEID(APIView):
     def post(self,request,*args,**kwargs):
-        
-        orgInst=organization.objects.get(user=request.user)
+        try:
+            orgInst=organization.objects.get(user=request.user)
 
-        eid=request.data['eid']
-        getperson=base_user.objects.get(username=eid)
-        personInst=person.objects.get(user=getperson)
-        personData=GetUserInfo_Personal(personInst).data
-        return Response(personData)
-        # except:
-        #     return Response("Organization not found")
+            eid=request.data['eid']
+            getperson=base_user.objects.get(username=eid)
+            personInst=person.objects.get(user=getperson)
+            personData=GetUserInfo_Personal(personInst).data
+            return Response(personData)
+        except:
+             return Response("Organization not found")
         
+
+class IndexInfo(APIView):
+    def get(self,request,*args,**kwargs):
+        personCount=person.objects.all().count()
+        organizationCount=organization.objects.all().count()
+        hospitalCount=Hospital.objects.all().count()
+
+
+        return Response({
+            "person":personCount,
+            "org":organizationCount,
+            "hospital":hospitalCount
+        })
 def generateOTP(email,num_of_otp):
     keygen=str(email)+"RNijLmlGONx4qgGCrgvm"
     key=base64.b32encode(keygen.encode())

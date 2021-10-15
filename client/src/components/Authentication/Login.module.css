@@ -3,4 +3,6 @@ margin: 23px;
 }
 .heading{
     margin: 23px;
+    padding:23px;
+    display: flex;
 }

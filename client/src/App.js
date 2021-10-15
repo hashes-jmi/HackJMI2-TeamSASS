@@ -6,6 +6,7 @@ import Map from "./components/Map Stats/Map";
 import Navbar from "./components/Navbar/Navbar";
 import Login from "./components/Authentication/Login";
 import Signup from "./components/Authentication/Signup";
+import UserMedicalData from './components/userMedicalData/UserMedicalData'
 import Verify from "./components/Authentication/Verify";
 
 function App() {
@@ -35,9 +36,11 @@ function App() {
       <Route path="/map">
         <Map />
       </Route>
+
       <Route path="/verify">
         <Verify toggleLoggedIn={loginHandler} />
       </Route>
+
     </div>
   );
 }
