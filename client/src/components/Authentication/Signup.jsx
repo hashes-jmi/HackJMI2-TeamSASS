@@ -31,16 +31,16 @@ function Signup(props) {
     e.preventDefault();
     console.log(userData);
     const requestObject = {
-      "name": userData.firstName + " " + userData.lastName,
-      "phone": +userData.phone,
-      "email": userData.email,
-      "aadhar": +userData.aadhar,
-      
-      "address": {
-        "country": userData.address.country,
-        "state": userData.address.state,
-        "pincode": userData.address.pincode,
-        "line1": userData.address.line_1,
+      name: userData.firstName + " " + userData.lastName,
+      phone: +userData.phone,
+      email: userData.email,
+      aadhar: +userData.aadhar,
+
+      address: {
+        country: userData.address.country,
+        state: userData.address.state,
+        pincode: userData.address.pincode,
+        line1: userData.address.line_1,
       },
     };
     console.log(requestObject);
@@ -243,7 +243,7 @@ function Signup(props) {
             />
           </div>
         </div>
-        <Button title="Signup" onClick={submitHandler} />
+        <Button onClick={submitHandler}>Signup</Button>
       </form>
     </Card>
   );

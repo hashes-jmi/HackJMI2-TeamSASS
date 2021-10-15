@@ -1,8 +1,9 @@
-import React from "react";
+import React, { Fragment } from "react";
 import Button from "../UI/Buttons/Button";
 import SecondaryButton from "../UI/Buttons/SecondaryButton";
 import classes from "./Navbar.module.css";
 import { NavLink } from "react-router-dom";
+import Colors from "../Colors";
 
 const Navbar = (props) => {
   const flexRowAlignClass = classes["flex-row-align"];
@@ -12,7 +13,7 @@ const Navbar = (props) => {
     <nav className={navbarClass}>
       <ul className={flexRowAlignClass}>
         <li>
-          <a href="/home">Main</a>
+          <a href="/home">Home</a>
         </li>
         <li>
           <a href="/map">MapStats</a>
@@ -20,17 +21,29 @@ const Navbar = (props) => {
       </ul>
       <ul className={authLinksClasses}>
         <li>
-          <a href="/my-e-medcard">My e-MedCard</a>
+          <a href="/my-e-medcard">My Health ID</a>
         </li>
-        <NavLink to="/login">
-          <SecondaryButton
-            title="Signin"
-            onClick={() => console.log("singin")}
-          />
-        </NavLink>
-        <NavLink to="/signup">
-          <Button title="Signup" onClick={() => console.log("signup")} />
-        </NavLink>
+        {!props.isLoggedIn ? (
+          <Fragment>
+            <NavLink to="/login">
+              <SecondaryButton
+                title="Signin"
+                onClick={() => console.log("singin")}
+              />
+            </NavLink>
+            <NavLink to="/signup">
+              <Button onClick={() => console.log("signup")}>Signup</Button>
+            </NavLink>
+          </Fragment>
+        ) : (
+          <Button>
+            <ion-icon
+              className={classes["ion-icon"]}
+              name="person-circle-outline"
+              size="large"
+            ></ion-icon>
+          </Button>
+        )}
       </ul>
     </nav>
   );

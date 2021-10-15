@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import "./App.css";
 import { Route, Redirect } from "react-router-dom";
 import Home from "./components/Home/Home";
@@ -6,20 +7,27 @@ import Navbar from "./components/Navbar/Navbar";
 import Login from "./components/Authentication/Login";
 import Signup from "./components/Authentication/Signup";
 import UserMedicalData from './components/userMedicalData/UserMedicalData'
+import Verify from "./components/Authentication/Verify";
+
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const loginHandler = () => {
+    setIsLoggedIn(true);
+  };
   return (
     <div>
-      <Navbar />
+      <Navbar isLoggedIn={isLoggedIn} />
       <Route path="/" exact>
         <Redirect to="/home" />
       </Route>
 
-      <Route path="/">
-        <Home />home
-      </Route>
-
       <Route path="/login">
         <Login />
+      </Route>
+
+      <Route path="/home">
+        <Home />
       </Route>
 
       <Route path="/signup">
@@ -28,7 +36,11 @@ function App() {
       <Route path="/map">
         <Map />
       </Route>
-      
+
+      <Route path="/verify">
+        <Verify toggleLoggedIn={loginHandler} />
+      </Route>
+
     </div>
   );
 }

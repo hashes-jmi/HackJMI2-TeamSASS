@@ -10,7 +10,9 @@ import Heading from "./../UI/Heading/Heading";
 const servicesCardData = [
   {
     id: "c1",
-    text: "Get your medical e-card",
+
+    text: "Get your online Health ID",
+
     imgURL: "",
   },
   {
@@ -20,7 +22,7 @@ const servicesCardData = [
   },
   {
     id: "c3",
-    text: "Get 25% discount on all health procedures with e-Medcard",
+    text: "Get 25% discount on all health procedures with Health ID",
     imgURL: "",
   },
 ];
@@ -33,7 +35,6 @@ const Home = () => {
           <img src={pmPic} alt="PM of India, Mr.Modi" />
           <div>
             <p>PM DIGITAL HEALTH MISSION....</p>
-            
           </div>
         </div>
       </div>
@@ -43,13 +44,9 @@ const Home = () => {
             <Heading text="NAME OF OUR WEBSITE" />
             <p>
               In order to achieve the mission
-              of.....adkshadkjhaskdhaskdhaksdhkasdhkasdhvnhg
-              dhfh f bhgtuh ghuth dbgeht bghuthha bghus lorem epsum here and
-              there and you and there my fine done compelte here and thenre but
-              this is a compelte website to be publihsed online.
             </p>
 
-            <Button title="Download Your e-MedCard" />
+            <Button>Download Your Health ID</Button>
           </section>
         </Card>
 
@@ -61,7 +58,9 @@ const Home = () => {
               {/* SERVICES */}
               {servicesCardData.map((data) => (
                 <div className={classes["service-card"]}>
-                  <div className={classes["service-card--text"]}>HELLO</div>
+                  <div className={classes["service-card--text"]}>
+                    {data.text}
+                  </div>
                 </div>
               ))}
             </div>

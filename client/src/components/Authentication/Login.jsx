@@ -4,16 +4,25 @@ import Card from "../UI/Card/Card";
 import Button from "../UI/Buttons/Button";
 import { useState } from "react";
 import axios from "axios";
+import Input from "./../UI/Input/Input";
+import { useHistory } from "react-router";
 function Login() {
-  const [addhar,setaadhar]=useState('');
+  const [addhar, setaadhar] = useState("");
+  const loginHandler = () => {
+    useHistory().push("/verify");
+  };
 
   return (
     <Card className={classes["login-modal"]}>
       <div className={classes.heading}>Login</div>
-      <input type="number" placeholder="Enter Adhar Number..." onChange={(e)=>{setaadhar(e.target.value)}} value={addhar} />
-      <Button title="Send OTP" onClick={(e)=>{
-        axios.post()
-      }} />
+      <Input
+        placeholder="Enter Adhar Number..."
+        onChange={(e) => {
+          setaadhar(e.target.value);
+        }}
+        value={addhar}
+      />
+      <Button onClick={loginHandler}>Send OTP</Button>
       <p>Don’t have an account? Sign up here!</p>
     </Card>
   );
